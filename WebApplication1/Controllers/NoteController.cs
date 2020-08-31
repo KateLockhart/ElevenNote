@@ -49,5 +49,19 @@ namespace WebApplication1.Controllers
 
             return Ok();
         }
+
+        // PUT / UPDATE NOTE
+        public IHttpActionResult Put(NoteEdit note)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateNoteService();
+
+            if (!service.UpdateNote(note))
+                return InternalServerError();
+
+            return Ok();
+        }
     }
 }
